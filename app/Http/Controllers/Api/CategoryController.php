@@ -16,8 +16,15 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    public function list(Request $request){
+    public function store(Request $request){
+        $category = Category::create($request->all());
+
+        return new CategoryResource($category);
+    }
+
+    public function list(){
         return CategoryResource::collection(Category::all());
     }
+
 
 }
