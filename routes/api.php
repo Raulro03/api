@@ -12,9 +12,10 @@ Route::get('/user', function (Request $request) {
 Route::get('lists/categories', [CategoryController::class, 'list']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('categories', CategoryController::class);
     Route::get('products', [ProductController::class, 'index']);
 });
+
 //Route::get('categories', [CategoryController::class, 'index']);
 //Route::get('categories/{category}', [CategoryController::class, 'show']);
 //Route::post('categories', [CategoryController::class, 'store']);
