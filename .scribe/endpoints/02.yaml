@@ -1,13 +1,17 @@
-name: Endpoints
-description: ''
+name: Products
+description: |-
+
+  Apis for Managing products
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/user
+    uri: api/products
     metadata:
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Products
+      groupDescription: |-
+
+        Apis for Managing products
       subgroup: ''
       subgroupDescription: ''
       title: ''
@@ -39,7 +43,7 @@ endpoints:
     auth:
       - headers
       - Authorization
-      - 'Bearer DbakeE13Vcfg6h4P5v6aZd8'
+      - 'Bearer cagDe1a3k6d4VZE5Phbfv86'
     controller: null
     method: null
     route: null
