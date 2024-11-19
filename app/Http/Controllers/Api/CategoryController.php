@@ -13,14 +13,27 @@ use Knuckles\Scribe\Attributes\Group;
 use Knuckles\Scribe\Attributes\QueryParam;
 use Symfony\Component\HttpFoundation\Response;
 
-#[Group('Categories', description: 'Managing categories')]
-#[QueryParam('page', 'int', 'The page number' , example: 12)]
+
 class CategoryController extends Controller
 {
     /**
-     * Get all categories
-     *
-     * Getting the list of the categories
+     * @OA\Get (
+     *     path="/categories",
+     *     tags={"Categories"},
+     *     summary="Get list all categories",
+     *     @OA\Response(
+     *      response="200",
+     *      description="Succesful operation",
+     *     ),
+     *     @OA\Response(
+     *      response="401",
+     *      description="Unauthenticated",
+     *     ),
+     *     @OA\Response(
+     *       response="403",
+     *       description="Forbidden",
+     *     ),
+     * ),
      */
     public function index(){
 
@@ -28,7 +41,7 @@ class CategoryController extends Controller
 
         return CategoryResource::collection(Category::all());
     }
-    #[Endpoint('Show Category', description: 'Get a category by ID')]
+
     public function show(Category $category)
     {
 
@@ -37,13 +50,7 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    /**
-     * Store a new category
-     *
-     * Create a new category
-     *
-     * @bodyParam name string required The name of category. Example: Electronics
-     */
+
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->all();
