@@ -46,7 +46,6 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->all();
