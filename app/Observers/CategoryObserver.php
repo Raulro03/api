@@ -18,14 +18,14 @@ class CategoryObserver
      */
     public function updated(Category $category): void
     {
-        //
+        Cache::forget('categories');
     }
     /**
      * Handle the Category "deleted" event.
      */
     public function deleted(Category $category): void
     {
-        //
+        Cache::forget('categories');
     }
     /**
      * Handle the Category "restored" event.
