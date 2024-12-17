@@ -45,6 +45,7 @@ class CategoryController extends Controller
     {
 
         //abort_if(! auth()->user()->tokenCan('categories-show'), 403);
+        abort_if(! auth()->user()->tokenCan('categories-show-create'), 403);
 
         return new CategoryResource($category);
     }
