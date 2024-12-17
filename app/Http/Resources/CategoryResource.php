@@ -25,7 +25,7 @@ class CategoryResource extends JsonResource
                 return $this->description;
             }),
             'photo' => $this->photo,
-            //'products' => ProductResource::collection($this->whenLoaded('products')),
+            'products' => ProductResource::make($this->whenLoaded('products')),
         ];
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ProductController extends Controller
@@ -14,4 +16,36 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function show(Product $product)
+    {
+
+        //abort_if(! auth()->user()->tokenCan('categories-show'), 403);
+
+        return new ProductResource($product);
+    }
+
+    public function store(StoreProductRequest $request)
+    {
+        $product = Product::create($request->validated());
+
+        return new ProductResource($product);
+    }
+
+    public function update(StoreProductRequest $request, Product $product)
+    {    //Con el category buscara con la id la categoria en concreto
+        $product->update($request->validated());
+
+        return new ProductResource($product);
+    }
+
+    public function destroy(Product $product){
+        $product->delete();
+
+        return response()->json(null, Response::HTTP_NO_CONTENT); //Respuesta hhtp constante sin contenido
+
+        //return response()->noContent();
+    }
+    
+
 }
