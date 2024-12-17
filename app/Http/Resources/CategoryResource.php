@@ -24,7 +24,9 @@ class CategoryResource extends JsonResource
                 }
                 return $this->description;
             }),
-            'photo' => $this->photo,
+            'photo' => $this->when($this->photo, function () use ($request) {
+                return $this->photo;
+            }),
             'products' => ProductResource::make($this->whenLoaded('products')),
         ];
     }

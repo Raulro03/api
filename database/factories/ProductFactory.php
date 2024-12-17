@@ -21,7 +21,8 @@ class ProductFactory extends Factory
             'name' => fake()->word(),
             'category_id' => Category::inRandomOrder()->first()->id, // inRandomOrder() esta creado en Builder.php
             'description' => fake()->paragraph,
-            'price' => rand(1000,99999)
+            'price' => rand(1000, 99999),
+            'photo' => fake()->words(asText: true),
         ];
     }
 }

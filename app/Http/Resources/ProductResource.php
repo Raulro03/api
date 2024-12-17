@@ -21,6 +21,9 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => number_format($this->price / 100, 2),
+            'photo' => $this->when($this->photo, function () use ($request) {
+                return $this->photo;
+            }),
             'category' => CategoryResource::make($this->whenLoaded('category')),
         ];
 

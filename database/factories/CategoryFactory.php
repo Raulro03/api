@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name' => fake()->words(asText: true),
             'description' => fake()->sentence(), //Para añadir una sentencia predefinida
+            'photo' => fake()->words(asText: true),
         ];
     }
 }

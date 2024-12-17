@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -28,7 +29,16 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        $data = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $name = Str::uuid() . '.' . $file->extension();
+            $file->storeAs('products', $name, 'public');
+            $data['photo'] = $name;
+        }
+
+        $product = Product::create($data);
 
         return new ProductResource($product);
     }
