@@ -29,7 +29,13 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('products', function ($request) {
             return $request->user()?->role === 'admin'
                 ? Limit::none()
-                : Limit::perMinute(5)->by($request->user()?->id ?: $request->ip());
+                : Limit::perMinute(5)->by($request->user()?->id ?: $request->ip())
+                ->response(function () {
+                    return response()->json([
+                        'status' => 429,
+                        'message' => 'Too many requests per minute',
+                    ], 429);
+                });
         });
         Category::observe(CategoryObserver::class);
     }
