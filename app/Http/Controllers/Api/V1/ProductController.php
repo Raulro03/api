@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,6 +47,10 @@ class ProductController extends Controller
 
         //return response()->noContent();
     }
-    
+    public function ProductByCategory($category_id){
+        $category = Category::with('products')->find($category_id);
+        $products = $category->products;
+        return ProductResource::collection($products);
+    }
 
 }
