@@ -11,6 +11,8 @@ class StoreTagRequest extends FormRequest
         return [
             'name' => ['required'],
             'slug' => ['required'],
+            'products' => 'array',
+            'products.*' => 'exists:products,id',
         ];
     }
 

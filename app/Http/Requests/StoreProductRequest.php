@@ -13,6 +13,8 @@ class StoreProductRequest extends FormRequest
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ];
     }
 

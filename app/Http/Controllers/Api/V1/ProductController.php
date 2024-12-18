@@ -40,6 +40,7 @@ class ProductController extends Controller
         }
 
         $product = Product::create($data);
+        $product->tags()->sync($request->input('tags', []));
 
         return new ProductResource($product);
     }
@@ -52,6 +53,8 @@ class ProductController extends Controller
     }
 
     public function destroy(Product $product){
+
+        $product->tags()->detach();
         $product->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT); //Respuesta hhtp constante sin contenido
@@ -64,8 +67,9 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
-    public function ProductByTag(Tag $tag){
-        $products = $tag->products();
+    public function ProductByTag($tag_id){
+        $tag = Tag::with('products')->find($tag_id);
+        $products = $tag->products;
         return ProductResource::collection($products);
     }
 

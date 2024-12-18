@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TagController extends Controller
 {
     public function index(){
-        $tags = Tag::with('tag')->paginate(9);
+        $tags = Tag::with('products')->paginate(9);
 
         return TagResource::collection($tags);
     }
@@ -26,9 +26,8 @@ class TagController extends Controller
 
     public function store(StoreTagRequest $request)
     {
-
         $tag = Tag::create($request->all());
-
+        $tag->products()->sync($request->input('products', []));
         return new TagResource($tag);
     }
 
@@ -40,6 +39,7 @@ class TagController extends Controller
     }
 
     public function destroy(Tag $tag){
+        $tag->products()->detach();
         $tag->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT); //Respuesta hhtp constante sin contenido
