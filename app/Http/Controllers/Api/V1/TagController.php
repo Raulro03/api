@@ -21,7 +21,7 @@ class TagController extends Controller
 
         //abort_if(! auth()->user()->tokenCan('categories-show'), 403);
 
-        return new TagResource($tag);
+        return new TagResource(Tag::with('products')->find($tag->id));
     }
 
     public function store(StoreTagRequest $request)

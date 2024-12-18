@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         //abort_if(! auth()->user()->tokenCan('categories-show'), 403);
 
-        return new ProductResource($product);
+        return new ProductResource(Product::with('category', 'tags')->find($product->id));
     }
 
     public function store(StoreProductRequest $request)
