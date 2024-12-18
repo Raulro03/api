@@ -19,8 +19,15 @@ class DatabaseSeeder extends Seeder
 
         //User::factory(10)->create(['name' => 'Test User', 'email' => 'test@example.com',]);
 
-        Category::factory(10)->create();
-        Product::factory(20)->create();
+        Category::factory(6)->create();
+
+        $categories = Category::all();
+
+        $categories->each(function ($category) {
+            $category->products()->saveMany(
+                Product::factory(2)->make()
+            );
+        });
 
     }
 }

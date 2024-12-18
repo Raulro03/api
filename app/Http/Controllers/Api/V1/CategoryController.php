@@ -69,6 +69,8 @@ class CategoryController extends Controller
     }
 
     public function destroy(Category $category){
+        $category->products()->delete();
+        
         $category->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT); //Respuesta hhtp constante sin contenido
