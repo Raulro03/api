@@ -25,6 +25,7 @@ class ProductResource extends JsonResource
                 return $this->photo;
             }),
             'category' => CategoryResource::make($this->whenLoaded('category')),
+            'tags' => TagResource::collection($this->whenLoaded('tags')),
         ];
 
         /*return parent::toArray($request);Devuelvetodo*/

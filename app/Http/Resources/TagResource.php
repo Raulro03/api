@@ -15,6 +15,7 @@ class TagResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'products' => ProductResource::collection($this->whenLoaded('products')),
 
         ];
     }

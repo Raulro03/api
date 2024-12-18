@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     public function index(){
-        $products = Product::with('category')->paginate(9);
+        $products = Product::with('category', 'tags')->paginate(9);
 
         return ProductResource::collection($products);
     }
@@ -61,6 +62,11 @@ class ProductController extends Controller
         $category = Category::with('products')->find($category_id);
         $products = $category->products;
         return ProductResource::collection($products);
+    }
+
+    public function ProductByTag($tag_id){
+
+        return ;
     }
 
 }

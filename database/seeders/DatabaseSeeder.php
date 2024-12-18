@@ -23,10 +23,16 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::all();
 
-        $categories->each(function ($category) {
+        $products = $categories->each(function ($category) {
             $category->products()->saveMany(
                 Product::factory(2)->make()
             );
+        });
+
+
+
+        $products->each(function ($product) {
+            $product->tags()->attach([rand(1,20), rand(1,20)]);
         });
 
     }
