@@ -64,9 +64,9 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
-    public function ProductByTag($tag_id){
-
-        return ;
+    public function ProductByTag(Tag $tag){
+        $products = $tag->products();
+        return ProductResource::collection($products);
     }
 
 }

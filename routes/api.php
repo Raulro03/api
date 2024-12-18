@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\ProductController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\Api\V1\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
