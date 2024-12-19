@@ -27,7 +27,7 @@ class TagController extends Controller
     public function store(StoreTagRequest $request)
     {
         $tag = Tag::create($request->all());
-        $tag->products()->sync($request->input('products', []));
+        $tag->products()->attach($request->input('products', []));
         return new TagResource($tag);
     }
 

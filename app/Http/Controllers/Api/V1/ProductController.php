@@ -40,7 +40,7 @@ class ProductController extends Controller
         }
 
         $product = Product::create($data);
-        $product->tags()->sync($request->input('tags', []));
+        $product->tags()->attach($request->input('tags', []));
 
         return new ProductResource($product);
     }
