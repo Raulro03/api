@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->nullable()->constrained('roles');
+            $table->foreignId('rol_id')->nullable()->constrained('roles');
         });
     }
 

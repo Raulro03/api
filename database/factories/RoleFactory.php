@@ -13,7 +13,7 @@ class RoleFactory extends Factory
     public function definition(): array
     {
         return [
-            'rol' => $this->faker->word(),
+            'rol' => 'guest',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

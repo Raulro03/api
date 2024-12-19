@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\Tag;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -40,14 +41,25 @@ class DatabaseSeeder extends Seeder
             $product->tags()->attach($randomTags);
         });
 
-        /*$user = User::create([
+        Role::factory()
+            ->has(User::factory()->state([
+                'name' => 'Raulor',
+                'email' => 'raul@gmail.com',
+                'password' => bcrypt('1234'),
+            ]))->create(['rol' => 'admin']);
+
+        Role::factory()
+            ->hasUsers(2)
+            ->create(['rol' => 'guest']);
+
+        $user = User::create([
             'name' => 'Raul',
             'email' => 'raul@email.es',
-            'password' => bcrypt('1234')
+            'password' => bcrypt('1234'),
         ]);
         $token = $user->createToken('developer-access', ['categories-list'])->plainTextToken;
 
-        echo "{$token}";*/
+        echo "{$token}";
 
        /* $products->each(function ($product) {
             $product->tags()->attach([rand(1,20), rand(1,20)]);
